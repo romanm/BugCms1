@@ -7,13 +7,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AppRest {
+	@Autowired private AppService appService;
+	@RequestMapping(value = "/page1/json/save_json_to_file", method = RequestMethod.POST)
+	public  @ResponseBody Map<String, Object> saveJsonToFile(@RequestBody Map<String, Object> jsonToJavaObject) {
+		appService.saveJsonToFile(jsonToJavaObject,"javaObjectToJson.json");
+		return jsonToJavaObject;
+	}
+
+	@RequestMapping(value = "/page1/readJsonFromFile", method = RequestMethod.GET)
+	public  @ResponseBody Map<String, Object> readJsonFromFile() {
+		return appService.readJsonFromFile("javaObjectToJson.json");
+	}
+
 	@RequestMapping(value = "/page1/readJsonFromRam", method = RequestMethod.GET)
 	public  @ResponseBody Map<String, Object> readJsonFromRam() {
 		Map<String, Object> map = new HashMap<>();
@@ -24,5 +38,5 @@ public class AppRest {
 		map.put("intList", intList);
 		return map;
 	}
-	
+
 }
