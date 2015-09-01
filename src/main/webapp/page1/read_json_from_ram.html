@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script type="text/javascript" src="/js/lib/angular.min.js"></script>
+</head>
 <body>
 	<h1>Зчитування JSON з сервера з пам’яті.</h1>
 	<ol>
-		<li>
-		В цій частині кода -- java object відсилається в http request як json object.
-		<pre>
+		<li>В цій частині кода -- java object відсилається в http request
+			як json object. <pre>
 package hello;
 @Controller
 public class AppRest {
@@ -19,10 +21,40 @@ public class AppRest {
 		map.put("intList", intList);
 		return map;
 	}
-}</pre></li>
+}
+			</pre>
+		</li>
+		<li>Оріентуйтесь на приклад <code>
+				http://www.w3schools.com/angular/tryit.asp?filename=try_ng_intro_controller
+			</code>
+		</li>
 	</ol>
 	<h2>Тестування</h2>
-	<a href="/page1/readJsonFromRam">/page1/readJsonFromRam</a>
+	<ol>
+		<li>
+			<a href="/page1/readJsonFromRam">/page1/readJsonFromRam</a>
+		</li>
+		<li>
+			<div ng-app="myApp" ng-controller="myCtrl">
+				{{text}}
+				<div>text = {{jsonFromRam.text}}</div>
+				<div>int = {{jsonFromRam.int}}</div>
+				<div>date = {{jsonFromRam.date | date}}</div>
+				<div>intList = {{jsonFromRam.intList}}</div>
+			</div>
+			<script type="text/javascript">
+				angular.module("myApp", []).controller("myCtrl",
+				function demoController($scope, $http) {
+					$scope.text = "Hello readJsonFromRam!";
+					$http.get("http://localhost:8080/page1/readJsonFromRam")
+					.success(function(response) {
+						$scope.jsonFromRam = response;
+						console.log($scope.jsonFromRam);
+					});
+				});
+			</script>
+		</li>
+	</ol>
 	<div>
 		<hr />
 		<a href="/">[home]</a>
