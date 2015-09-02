@@ -1,0 +1,9 @@
+{
+  "title" : "BugTinyWiki development",
+  "pages" : [ {
+  "urlKey" : "page1",
+  "html" : "test html"
+  }, {} ],
+  "int" : 369,
+  "date" : "2015-09-03T17:21:02.223Z"
+}

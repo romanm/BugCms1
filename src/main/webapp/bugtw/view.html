@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+<title>BugTinyWiki view</title>
+<script type="text/javascript" src="/js/lib/angular.min.js"></script>
+<script type="text/javascript" src="/js/lib/textAngular-rangy.min.js"></script>
+<script type="text/javascript" src="/js/lib/textAngular-sanitize.min.js"></script>
+<script type="text/javascript" src="/js/lib/textAngular.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+</head>
+<body>
+	<h1>BugTinyWiki view</h1>
+	Все в html.
+
+<div>
+	<hr />
+	<a href="/">[home]</a>
+</div>
+
+<script type="text/javascript">
+
+
+	angular.module("myApp", []).controller("myCtrl",
+	function demoController($scope, $http) {
+		
+$scope.parameters = {};
+	console.log("----")
+	console.log(window.location)
+	console.log(window.location.search)
+if(window.location.search){
+	angular.forEach(window.location.search.split("?")[1].split("&"), function(value, index){
+	console.log(value)
+		var par = value.split("=");
+		$scope.parameters[par[0]] = par[1];
+	});
+	console.log($scope.parameters)
+}
+		
+		
+		$http.get("http://localhost:8080/page1/readBugTinyWiki")
+		.success(function(response) {
+			$scope.jsonFromRam = response;
+			console.log($scope.jsonFromRam);
+		});
+	});
+</script>
+</body>
+</html>

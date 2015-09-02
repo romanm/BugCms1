@@ -17,15 +17,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AppRest {
 	@Autowired private AppService appService;
+	//------------BugTinyWiki------------------------------------
+	String bugTinyWikiJsonFileName = "bugtw/bugTinyWiki.json";
+	@RequestMapping(value = "/saveBugTinyWiki", method = RequestMethod.POST)
+	public  @ResponseBody Map<String, Object> saveBugTinyWiki(@RequestBody Map<String, Object> bugTinyWikiJavaObject) {
+		appService.saveJsonToFile(bugTinyWikiJavaObject,bugTinyWikiJsonFileName);
+		return bugTinyWikiJavaObject;
+	}
+	
+	@RequestMapping(value = "/page1/readBugTinyWiki", method = RequestMethod.GET)
+	public  @ResponseBody Map<String, Object> readBugTinyWiki() {
+		return appService.readJsonFromFile(bugTinyWikiJsonFileName);
+	}
+	//------------BugTinyWiki------------------------------------END
+	
+	//--------------componenten------------------------------
+	String firstJsonFileName = "page1/javaObjectToJson.json";
 	@RequestMapping(value = "/page1/json/save_json_to_file", method = RequestMethod.POST)
 	public  @ResponseBody Map<String, Object> saveJsonToFile(@RequestBody Map<String, Object> jsonToJavaObject) {
-		appService.saveJsonToFile(jsonToJavaObject,"javaObjectToJson.json");
+		appService.saveJsonToFile(jsonToJavaObject,firstJsonFileName);
 		return jsonToJavaObject;
 	}
 
 	@RequestMapping(value = "/page1/readJsonFromFile", method = RequestMethod.GET)
 	public  @ResponseBody Map<String, Object> readJsonFromFile() {
-		return appService.readJsonFromFile("javaObjectToJson.json");
+		return appService.readJsonFromFile(firstJsonFileName);
 	}
 
 	@RequestMapping(value = "/page1/readJsonFromRam", method = RequestMethod.GET)
