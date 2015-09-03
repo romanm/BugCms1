@@ -1,9 +1,13 @@
 {
   "title" : "BugTinyWiki development",
-  "pages" : [ {
-  "urlKey" : "page1",
-  "html" : "test html"
-  }, {} ],
+  "page1" : {
+    "title" : "first page",
+    "html" : "<p>te<b>st</b> <i>html</i>. Hello. <br/></p><p>Міняем текст.<br/></p>"
+  },
   "int" : 369,
-  "date" : "2015-09-03T17:21:02.223Z"
+  "date" : "2015-09-03T17:21:02.223Z",
+  "page11" : {
+    "title" : "page11",
+    "html" : "<p>page text</p><p>Нова сторінка<br/></p>"
+  }
 }

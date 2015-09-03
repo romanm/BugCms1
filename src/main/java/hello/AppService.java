@@ -29,6 +29,8 @@ public class AppService {
 
 	public Map<String, Object> readJsonFromFile(String fileName) {
 		File file = new File(AppConfig.applicationFolderPfad + AppConfig.innerDbFolderPfad + fileName);
+		System.out.println(32);
+		System.out.println(file);
 		Map<String, Object> readJsonFileToJavaObject = null;
 		try {
 			readJsonFileToJavaObject = mapper.readValue(file, Map.class);

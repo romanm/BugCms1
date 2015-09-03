@@ -21,6 +21,8 @@ public class AppRest {
 	String bugTinyWikiJsonFileName = "bugtw/bugTinyWiki.json";
 	@RequestMapping(value = "/saveBugTinyWiki", method = RequestMethod.POST)
 	public  @ResponseBody Map<String, Object> saveBugTinyWiki(@RequestBody Map<String, Object> bugTinyWikiJavaObject) {
+		System.out.println(24);
+		System.out.println(bugTinyWikiJsonFileName);
 		appService.saveJsonToFile(bugTinyWikiJavaObject,bugTinyWikiJsonFileName);
 		return bugTinyWikiJavaObject;
 	}

@@ -10,39 +10,27 @@
 </head>
 <body>
 	<h1>BugTinyWiki view</h1>
-	Все в html.
+	<div>
+		<a href="/bugtwed/edit.html?{{pageKey}}">Редагувати</a>
+	</div>
+	<div ng-bind-html="pageObject.html"></div>
+	<div>
+		<hr />
+		<a href="/">[home]</a>
+	</div>
 
-<div>
-	<hr />
-	<a href="/">[home]</a>
-</div>
-
-<script type="text/javascript">
-
-
-	angular.module("myApp", []).controller("myCtrl",
-	function demoController($scope, $http) {
-		
-$scope.parameters = {};
-	console.log("----")
-	console.log(window.location)
-	console.log(window.location.search)
-if(window.location.search){
-	angular.forEach(window.location.search.split("?")[1].split("&"), function(value, index){
-	console.log(value)
-		var par = value.split("=");
-		$scope.parameters[par[0]] = par[1];
-	});
-	console.log($scope.parameters)
-}
-		
-		
-		$http.get("http://localhost:8080/page1/readBugTinyWiki")
-		.success(function(response) {
-			$scope.jsonFromRam = response;
-			console.log($scope.jsonFromRam);
+	<script type="text/javascript">
+		angular.module("myApp", ['textAngular']).controller("myCtrl",
+		function demoController($scope, $http) {
+			$scope.pageKey = window.location.search.substring(1);
+			$http.get("http://localhost:8080/page1/readBugTinyWiki")
+			.success(function(response) {
+				$scope.jsonFromRam = response;
+				console.log($scope.jsonFromRam);
+				$scope.pageObject = response[$scope.pageKey];
+				console.log($scope.pageObject);
+			});
 		});
-	});
-</script>
+	</script>
 </body>
 </html>
